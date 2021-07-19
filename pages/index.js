@@ -4,16 +4,16 @@ import RecipeCard from '../components/RecipeCard'
 export default function Recipes({ recipes }) {
   console.log(recipes)
   return (
-    <div className="recipe-list" >
-      {recipes.map(recipe => (
+    <div className="recipe-list">
+      {recipes.map((recipe) => (
         <RecipeCard key={recipe.sys.id} recipe={recipe}></RecipeCard>
       ))}
 
       <style jsx>{`
         .recipe-list {
-          display:grid;
+          display: grid;
           grid-template-columns: 1fr 1fr;
-          grid-gap:20px;
+          grid-gap: 20px;
         }
       `}</style>
     </div>
@@ -21,19 +21,18 @@ export default function Recipes({ recipes }) {
 }
 
 export const getStaticProps = async () => {
-  const {CONTENTFUL_SPACE_ID,CONTENTFUL_ACCESS_TOKEN} = process.env
+  const { CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN } = process.env
   const client = createClient({
     space: CONTENTFUL_SPACE_ID,
-    accessToken: CONTENTFUL_ACCESS_TOKEN
+    accessToken: CONTENTFUL_ACCESS_TOKEN,
   })
 
   const res = await client.getEntries({ content_type: 'recipe' })
-  
+
   return {
     props: {
       recipes: res.items,
     },
-    revalidate: 1
+    revalidate: 1,
   }
-  
 }
