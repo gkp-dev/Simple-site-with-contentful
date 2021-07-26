@@ -4,7 +4,7 @@ import initAOS from '../hooks/initAOS'
 
 export default function RecipeCard({ recipe }) {
   //Initalize animation
-  initAOS()
+  initAOS({ duration: 2000 })
   const { title, slug, cookingTime, thumbnail } = recipe.fields
   return (
     <div className="card" data-aos="fade-up">
